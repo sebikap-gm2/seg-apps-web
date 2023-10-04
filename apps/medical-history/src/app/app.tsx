@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Message } from '@seg-apps-web/api-interfaces';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from '../views/login/login';
+import Home from '../views/home/home';
 
 export const App = () => {
   const [m, setMessage] = useState<Message>({ message: '' });
@@ -11,16 +14,12 @@ export const App = () => {
   }, []);
 
   return (
-    <>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to medical-history!</h1>
-        <img
-          width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-          alt="Nx - Smart, Fast and Extensible Build System"
-        />
-      </div>
-      <div>{m.message}</div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login/>} />
+        <Route path="/home" element={<Home/>} />
+        {/*<Route element={<NotFound/>} />*/}
+      </Routes>
+    </Router>
   );
 };
