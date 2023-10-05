@@ -5,6 +5,7 @@ html {
   body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    margin: 0;
   }
   
   a {
@@ -35,7 +36,7 @@ html {
     justify-content: center;
     width: 100%;
     min-height: 100%;
-    padding: 20px;
+    transform: translate(0%, 50%) !important;
   }
   
   #formContent {
@@ -44,7 +45,7 @@ html {
     background: #fff;
     padding: 30px;
     width: 90%;
-    max-width: 450px;
+    max-width: 522px;
     position: relative;
     padding: 0px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
@@ -159,8 +160,8 @@ html {
   @-webkit-keyframes fadeInDown {
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
     }
     100% {
       opacity: 1;
@@ -172,8 +173,8 @@ html {
   @keyframes fadeInDown {
     0% {
       opacity: 0;
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
     }
     100% {
       opacity: 1;
@@ -197,33 +198,33 @@ html {
     -moz-animation-fill-mode:forwards;
     animation-fill-mode:forwards;
   
-    -webkit-animation-duration:1s;
-    -moz-animation-duration:1s;
-    animation-duration:1s;
+    -webkit-animation-duration:0.2s;
+    -moz-animation-duration:0.2s;
+    animation-duration:0.2s;
   }
   
   .fadeIn.first {
+    -webkit-animation-delay: 0.2s;
+    -moz-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+  }
+  
+  .fadeIn.second {
     -webkit-animation-delay: 0.4s;
     -moz-animation-delay: 0.4s;
     animation-delay: 0.4s;
   }
   
-  .fadeIn.second {
+  .fadeIn.third {
     -webkit-animation-delay: 0.6s;
     -moz-animation-delay: 0.6s;
     animation-delay: 0.6s;
   }
   
-  .fadeIn.third {
+  .fadeIn.fourth {
     -webkit-animation-delay: 0.8s;
     -moz-animation-delay: 0.8s;
     animation-delay: 0.8s;
-  }
-  
-  .fadeIn.fourth {
-    -webkit-animation-delay: 1s;
-    -moz-animation-delay: 1s;
-    animation-delay: 1s;
   }
   
   /* Simple CSS3 Fade-in Animation */
