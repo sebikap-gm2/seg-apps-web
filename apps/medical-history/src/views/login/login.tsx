@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Message } from '@seg-apps-web/api-interfaces';
 import './login-styles.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,28 +11,63 @@ const Login = () => {
   }, []);*/
 
   const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("")
 
   const logIn = () => {
+    console.log("user: " + username);
+    console.log("pass: " + password)
     navigate('/home');
+  };
+
+
+  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(event.target.value); // Actualiza username con el valor del campo de entrada
+  };
+
+
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value); // Actualiza username con el valor del campo de entrada
   };
 
   return (
     <>
       <div className="wrapper fadeInDown">
-      <div id="formContent">
-        <div className="fadeIn first">
-          <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-        </div>
-        <form>
-          <input type="text" id="login" className="fadeIn second" name="login" placeholder="login"/>
-          <input type="text" id="password" className="fadeIn third" name="login" placeholder="password"/>
-          <input type="submit" onClick={logIn} className="fadeIn fourth" value="Log In"/>
-        </form>
-        <div id="formFooter">
-          <a className="underlineHover" href="#">Forgot Password?</a>
+        <div id="formContent">
+
+          <div className="logo">
+            <img src="../assets/Medicare.png" alt="Logo" />
+          </div>
+
+          <form>
+            <input
+              type="text"
+              id="login"
+              className="fadeIn second"
+              name="login"
+              placeholder="Usuario"
+              value={username} // Enlaza el valor del campo de entrada a la variable username
+              onChange={handleUsernameChange} // Establece el controlador de eventos onChange
+            />
+            <input
+              type="password"
+              id="password"
+              className="fadeIn third"
+              name="login"
+              placeholder="Contraseña"
+              value={password} // Enlaza el valor del campo de entrada a la variable username
+              onChange={handlePasswordChange} // Establece el controlador de eventos onChange
+            />
+            <input type="submit" onClick={logIn} className="fadeIn fourth" value="Ingresar" />
+          </form>
+          <div id="formFooter">
+            <a
+              onClick={() => navigate('/forgotPassword')}
+              className="underlineHover"
+            >¿Olvidaste tu Contraseña?</a>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 };
