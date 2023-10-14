@@ -49,8 +49,8 @@ const Register = () => {
                     <input type="text" id="name" className="fadeIn second" name="register" placeholder="Nombre" onChange={(event) => setNombre(event.target.value)} />
                     <input type="text" id="lastname" className="fadeIn third" name="register" placeholder="Apellido" onChange={(event) => setApellido(event.target.value)} />
                     <input type="text" id="mail" className="fadeIn fourth" name="register" placeholder="Mail" onChange={(event) => setMail(event.target.value)} />
-                    <input type="password" id="mail" className="fadeIn fifth" name="register" placeholder="Contraseña" onChange={(event) => setContraseña(event.target.value)} />
-                    <input type="password" id="mail" className="fadeIn sixth" name="register" placeholder="Repetir Contraseña" onChange={(event) => setContraseñaRepetida(event.target.value)} />
+                    <input type="password" id="password" className="fadeIn fifth" name="register" placeholder="Contraseña" onChange={(event) => setContraseña(event.target.value)} />
+                    <input type="password" id="repeatPassword" className="fadeIn sixth" name="register" placeholder="Repetir Contraseña" onChange={(event) => setContraseñaRepetida(event.target.value)} />
                     {warningMessage && <div className="warning">{warningMessage}</div>}
                     <input type="submit" onClick={singUp} className="fadeIn seventh" value="Registrarme" />
                     {recuperoMessage && <div className="success">{recuperoMessage}</div>}

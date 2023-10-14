@@ -6,6 +6,7 @@ import Home from '../views/home/home';
 import Profile from '../views/profile/profile';
 import ForgotPassword from '../views/forgotPassword/forgotPassword';
 import Register from '../views/register/Register';
+import NotFound from '../views/notfound/notfound';
 
 export const App = () => {
   const [m, setMessage] = useState<Message>({ message: '' });
@@ -24,7 +25,7 @@ export const App = () => {
         <Route path="/profile" element={<Profile/>} />
         <Route path="/forgotPassword" element={<ForgotPassword/>} />
         <Route path="/register" element={<Register/>} />
-        {/*<Route element={<NotFound/>} />*/}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

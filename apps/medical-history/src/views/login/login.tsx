@@ -55,7 +55,7 @@ const Login = () => {
           </div>
           <input
             type="text"
-            id="login"
+            id="username"
             className="fadeIn second"
             name="login"
             placeholder="Usuario"
