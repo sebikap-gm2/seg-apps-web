@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './forgotPassword-styles.css';
 import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
