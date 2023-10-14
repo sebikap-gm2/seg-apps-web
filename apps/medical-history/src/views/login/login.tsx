@@ -13,11 +13,25 @@ const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("")
+  const [warningMessage, setWarningMessage] = useState('');
+
 
   const logIn = () => {
-    console.log("user: " + username);
-    console.log("pass: " + password)
-    navigate('/home');
+
+    //pegarle con el user y la pass la back.
+
+    // Si las credenciales son incorrectas, establece el mensaje de advertencia.
+    if (username === 'admin') {
+      if (password === 'admin') {
+        console.log("user: " + username);
+        console.log("pass: " + password)
+        navigate('/home');
+      } else {
+        setWarningMessage('Contraseña incorrecta');
+      }
+    } else {
+      setWarningMessage('Ese usuario no existe');
+    }
   };
 
 
@@ -30,46 +44,46 @@ const Login = () => {
     setPassword(event.target.value); // Actualiza username con el valor del campo de entrada
   };
 
+
+
   return (
     <>
       <div className="wrapper fadeInDown">
         <div id="formContent">
-
           <div className="logo">
             <img src="../assets/Medicare.png" alt="Logo" />
           </div>
-
-          <form>
-            <input
-              type="text"
-              id="login"
-              className="fadeIn second"
-              name="login"
-              placeholder="Usuario"
-              value={username} // Enlaza el valor del campo de entrada a la variable username
-              onChange={handleUsernameChange} // Establece el controlador de eventos onChange
-            />
-            <input
-              type="password"
-              id="password"
-              className="fadeIn third"
-              name="login"
-              placeholder="Contraseña"
-              value={password} // Enlaza el valor del campo de entrada a la variable username
-              onChange={handlePasswordChange} // Establece el controlador de eventos onChange
-            />
-            <input type="submit" onClick={logIn} className="fadeIn fourth" value="Ingresar" />
-          </form>
+          <input
+            type="text"
+            id="login"
+            className="fadeIn second"
+            name="login"
+            placeholder="Usuario"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+          <input
+            type="password"
+            id="password"
+            className="fadeIn third"
+            name="login"
+            placeholder="Contraseña"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <input type="submit" onClick={logIn} className="fadeIn fourth" value="Ingresar" />
+          {warningMessage && <div className="warning">{warningMessage}</div>}
           <div id="formFooter">
-            <a
-              onClick={() => navigate('/forgotPassword')}
-              className="underlineHover"
-            >¿Olvidaste tu Contraseña?</a>
+            <a onClick={() => navigate('/forgotPassword')} className="underlineHover">¿Olvidaste tu Contraseña?</a>
+            <span className="separator">|</span>
+            <a onClick={() => navigate('/register')} className="underlineHover">Registrarse</a>
           </div>
+
         </div>
       </div>
     </>
   );
-};
+}
+
 
 export default Login;

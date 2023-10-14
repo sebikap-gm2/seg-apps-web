@@ -191,16 +191,6 @@ input[type=text]:placeholder {
   margin-top: 20px;
 }
 
-/* Estilos para el mensaje de advertencia */
-.warning {
-  color: #d9534f; /* Color de texto rojo */
-  background-color: #f2dede; /* Fondo rojo claro */
-  border: 1px solid #ebccd1; /* Borde rojo */
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-}
-
 .separator {
   margin: 0 10px; /* Ajusta el espacio horizontal entre los botones según tus preferencias */
 }
