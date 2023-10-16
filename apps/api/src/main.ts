@@ -25,14 +25,15 @@ app.post('/login', (req: TypedRequestBody<User>, res) => {
   res.status(200).send(greeting);
 });
 
-app.post('/recover', (req: TypedRequestBody<UserWithoutPassword>, res) => {
+app.post('/recover', async (req: TypedRequestBody<UserWithoutPassword>, res) => {
   const user = UserService.getUserByUsername(req.body.username)
   if (!user) {
     res.status(401).send({ message: 'User not found' })
     return
   }
-
-  res.status(200).send({ message: 'Email sent' })
+  const { ok, message } = await UserService.recoverPassword(req.body.username)
+  const status = ok ? 200 : 401
+  res.status(status).send({ message })
 })
 
 const port = process.env.port || 3333;

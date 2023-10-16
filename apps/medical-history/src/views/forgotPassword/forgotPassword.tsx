@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { HTTP } from '../../services';
+
+const http = new HTTP('http://localhost:3333');
 
 const ForgotPassword = () => {
   const [messageVisible, setMessageVisible] = useState(false);
@@ -20,17 +23,9 @@ const ForgotPassword = () => {
     setUsername(event.target.value); // Actualiza username con el valor del campo de entrada
   };
 
-  function handleRecuperarPassword() {
-    if (username !== 'admin') {
-      setWarningMessage('El usuario ingresado no existe');
-    } else {
-      setWarningMessage('');
-      console.log('entro');
-      setRecuperoMessage(
-        'Enviamos la nueva contraseña al mail: ' + username + '@gmail.com'
-      );
-      setRecuperoContraseña(true);
-    }
+  async function handleRecuperarPassword() {
+    const res = await http.post<{ message: string }>('/recover', { username });
+    setRecuperoMessage(res.payload.message);
   }
 
   return (
