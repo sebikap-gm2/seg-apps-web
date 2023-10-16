@@ -1,6 +1,6 @@
 export class HTTP {
   constructor(public baseURL: string) { }
-  async post(url = '', data = {}) {
+  async post<T, E>(url = '', data = {}) {
     // Opciones por defecto estan marcadas con un *
     const response = await fetch(this.baseURL + url, {
       method: 'POST',
@@ -18,9 +18,17 @@ export class HTTP {
 
     const payload = await response.json()
 
-    return {
-      ok: response.ok,
-      payload
+    if (response.ok) {
+      return {
+        ok: true as const,
+        payload: payload as T
+      }
     }
+
+    return {
+      ok: false as const,
+      payload: payload as E
+    }
+
   }
 }

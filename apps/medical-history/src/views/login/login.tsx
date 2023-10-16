@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import './login-styles.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { HTTP } from '../../services';
+import { ResponseError, User } from '@seg-apps-web/api-interfaces';
 
 const http = new HTTP('http://localhost:3333');
 
@@ -12,14 +13,18 @@ const Login = () => {
   const [warningMessage, setWarningMessage] = useState('');
 
   const logIn = async () => {
-    const res = await http.post('/login', { username, password });
+    const res = await http.post<User, ResponseError>('/login', {
+      username,
+      password,
+    });
     console.log(res);
 
     if (res.ok) {
       navigate('/home');
       return;
+    } else {
+      setWarningMessage(res.payload.message);
     }
-    setWarningMessage(res.payload.message);
   };
 
   const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) =>

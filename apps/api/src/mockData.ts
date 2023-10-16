@@ -1,7 +1,4 @@
-export type User = {
-  username: string
-  password: string
-}
+import { User } from '@seg-apps-web/api-interfaces'
 
 export const USERS: User[] = [
   { username: 'admin', password: 'admin123' }

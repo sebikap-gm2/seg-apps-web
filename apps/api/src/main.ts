@@ -1,19 +1,19 @@
 import * as express from 'express';
-import { Message } from '@seg-apps-web/api-interfaces';
 import * as cors from 'cors'
-import { USERS } from './models';
+import { TypedRequestBody, User } from '@seg-apps-web/api-interfaces';
+import { USERS } from './mockData';
 
 const app = express();
 app.use(cors())
 app.use(express.json())
 
-const greeting: Message = { message: 'Welcome to api!' };
+const greeting = { message: 'Welcome to api!' };
 
 app.get('/api', (req, res) => {
   res.send(greeting);
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', (req: TypedRequestBody<User>, res) => {
   const user = USERS.find(u => u.username === req.body.username)
   if (!user) {
     res.status(401).send({ message: 'User not found' })
@@ -24,6 +24,10 @@ app.post('/login', (req, res) => {
   }
   res.status(200).send(greeting);
 });
+
+app.post('/recover', (req, res) => {
+  res.status(200).send({ message: 'Email sent' })
+})
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {
