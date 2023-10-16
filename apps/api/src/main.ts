@@ -1,7 +1,10 @@
 import * as express from 'express';
 import { Message } from '@seg-apps-web/api-interfaces';
+import * as cors from 'cors'
 
 const app = express();
+app.use(cors())
+app.use(express.json())
 
 const greeting: Message = { message: 'Welcome to api!' };
 
