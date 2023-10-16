@@ -1,7 +1,23 @@
+.navbar {
+    background-color: white;
+    color: white;
+    padding: 10px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Agregar un borde alrededor del sidebar */
+    border: 1px solid black; /* 1px de ancho y color negro */
+}
+
+.logo {
+    height: 60px;
+}
+  
 .emp-profile{
-    padding: 3%;
-    margin-top: 2%;
-    border-radius: 0.5rem;
+    padding-top: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
     background: #fff;
 }
 .profile-img{
