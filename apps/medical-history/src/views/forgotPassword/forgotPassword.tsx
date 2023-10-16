@@ -2,13 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
-    /*const [m, setMessage] = useState<Message>({ message: '' });
-    useEffect(() => {
-      fetch('/api')
-        .then((r) => r.json())
-        .then(setMessage);
-    }, []);*/
-
     const [messageVisible, setMessageVisible] = useState(false);
 
     const [username, setUsername] = useState("");
