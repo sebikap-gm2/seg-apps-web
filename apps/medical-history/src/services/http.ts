@@ -1,11 +1,13 @@
+import { ResponseError } from "@seg-apps-web/api-interfaces";
+
 export class HTTP {
   constructor(public baseURL: string) { }
-  async post<T, E>(url = '', data = {}) {
+  async post<T>(url = '', data = {}) {
     // Opciones por defecto estan marcadas con un *
     const response = await fetch(this.baseURL + url, {
       method: 'POST',
       // mode: 'no-cors', // no-cors, *cors, same-origin
-      // cache: 'no-cache',
+      cache: 'no-cache',
       // credentials: 'omit', // include, *same-origin, omit
       headers: {
         'Content-Type': 'application/json'
@@ -27,7 +29,7 @@ export class HTTP {
 
     return {
       ok: false as const,
-      payload: payload as E
+      payload: payload as ResponseError
     }
 
   }
