@@ -1,0 +1,75 @@
+.navbar {
+    background-color: white;
+    color: white;
+    padding: 10px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Agregar un borde alrededor del sidebar */
+  border: 1px solid black; /* 1px de ancho y color negro */
+  }
+  
+  .logo {
+    height: 60px;
+  }
+  
+  .content {
+    display: 100%;
+    margin-top: 100px; /* Aumenta el margen superior para evitar solapamiento con la navbar */
+  }
+  
+  .sidebar {
+    /* Agregar un borde alrededor del sidebar */
+  border: 1px solid black; /* 1px de ancho y color negro */
+    width: 200px;
+    background-color: white;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 80px; /* Ajusta la posición de la barra lateral debajo de la navbar */
+    bottom: 0;
+    left: 0;
+  }
+  
+  .sidebar a {
+    
+    display: block;
+    color: black;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+  
+  .main-content {
+    margin-left: 220px;
+    margin-top: 100px; /* Aumenta el margen superior para evitar solapamiento con la navbar */
+  }
+  
+/* Añade estos estilos al final de tu archivo home-styles.css o en un archivo CSS separado */
+.custom-table {
+    width: 50%; /* Reducir el ancho de la tabla al 80% del contenedor */
+    margin: 20px 0; /* Cambia el margen superior e inferior a 20px */
+    margin-left: 200px; /* Ajusta el margen izquierdo según el ancho del .sidebar */
+    border-collapse: collapse;
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    border: 1px solid #ddd; /* Bordes para las celdas */
+    padding: 8px; /* Espacio interno en las celdas */
+    text-align: center; /* Alineación de texto en el centro */
+  }
+  
+  .custom-table th {
+    background-color: #f2f2f2; /* Color de fondo para los encabezados */
+    font-weight: bold; /* Texto en negrita en los encabezados */
+  }
+  
+  .custom-table tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo para filas pares */
+  }
+  
+  .custom-table tr:hover {
+    background-color: #ddd; /* Color de fondo en hover */
+  }
+  
