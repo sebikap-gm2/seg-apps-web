@@ -17,7 +17,6 @@ const Login = () => {
       username,
       password,
     });
-    console.log(res);
 
     if (res.ok) {
       navigate('/home');
