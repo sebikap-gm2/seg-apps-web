@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as cors from 'cors'
-import { TypedRequestBody, User } from '@seg-apps-web/api-interfaces';
-import { USERS } from './mockData';
+import { TypedRequestBody, User, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
+import { UserService } from './app/services';
 
 const app = express();
 app.use(cors())
@@ -14,7 +14,7 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/login', (req: TypedRequestBody<User>, res) => {
-  const user = USERS.find(u => u.username === req.body.username)
+  const user = UserService.getUserByUsername(req.body.username)
   if (!user) {
     res.status(401).send({ message: 'User not found' })
     return
@@ -25,7 +25,13 @@ app.post('/login', (req: TypedRequestBody<User>, res) => {
   res.status(200).send(greeting);
 });
 
-app.post('/recover', (req, res) => {
+app.post('/recover', (req: TypedRequestBody<UserWithoutPassword>, res) => {
+  const user = UserService.getUserByUsername(req.body.username)
+  if (!user) {
+    res.status(401).send({ message: 'User not found' })
+    return
+  }
+
   res.status(200).send({ message: 'Email sent' })
 })
 
