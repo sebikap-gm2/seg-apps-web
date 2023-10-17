@@ -4,6 +4,8 @@ import { getLeftSideOfEmail } from "../utils/mail";
 
 // TODO: Implement with BD
 let UserBD = [...USERS]
+const Email = new Emailer()
+
 
 export class UserService {
   static getUserByUsername(username: string) {
@@ -20,7 +22,6 @@ export class UserService {
     }
     const newPass = getLeftSideOfEmail(username)
     this.updatePassword(username, newPass)
-    const Email = new Emailer()
     const result = await Email.sendRecoverMail(username, newPass)
     if (result) {
       return { ok: true, message: 'Email Sent' }
