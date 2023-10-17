@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react';
 import './login-styles.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { HTTP } from '../../services';
+import { HTTP, getCookie, setCookie } from '../../services';
 import { User } from '@seg-apps-web/api-interfaces';
 
 const http = new HTTP('http://localhost:3333');
@@ -19,6 +19,8 @@ const Login = () => {
     });
 
     if (res.ok) {
+      setCookie('user', res.payload);
+      const cookie = getCookie('user');
       navigate('/home');
       return;
     } else {

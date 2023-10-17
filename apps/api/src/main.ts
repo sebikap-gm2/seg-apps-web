@@ -25,7 +25,7 @@ app.post('/login', async (req: TypedRequestBody<User>, res) => {
       res.status(401).send({ message: 'Password is incorrect' });
     } else {
       console.log('found user', user)
-      res.status(200).send({ message: 'user authorized' });
+      res.status(200).send(user);
     }
   } catch (error) {
     res.status(500).send({ message: error.message });
