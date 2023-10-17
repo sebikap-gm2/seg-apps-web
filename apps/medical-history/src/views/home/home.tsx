@@ -22,6 +22,7 @@ const Home = () => {
           <a href="/opcion2">Mi Cuenta</a>
           <a href="/opcion3">Cobertura</a>
         </div>
+        <div style={{marginLeft:'12%'}}>
         <Table responsive className="custom-table">
           <thead>
             <tr>
@@ -52,6 +53,7 @@ const Home = () => {
             </tr>
           </tbody>
         </Table>
+        </div>
       </div>
     </div>
   );
