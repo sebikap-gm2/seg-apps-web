@@ -1,29 +1,10 @@
-import * as express from 'express';
-import * as cors from 'cors'
+
 import { TypedRequestBody, User, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
 import { UserService } from './app/services';
-import {UserRepository} from "./app/repositories/user.repository";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const sqlite3 = require('sqlite3').verbose();
+import { setup } from './setup';
 
-const app = express();
-app.use(cors())
-app.use(express.json())
+const app = setup()
 
-const db = new sqlite3.Database(':memory:');
-db.serialize(async function () {
-  await db.run("CREATE TABLE users (id INT, username TEXT, password TEXT)");
-
-  // You can add some initial data if needed
-  const stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?)");
-  stmt.run(1, 'user1', 'password1');
-  stmt.finalize();
-
-  db.each("SELECT * FROM users", function (err, row) {
-    console.log(row.id, row.username, row.password);
-  });
-});
-UserRepository.setDatabase(db)
 const greeting = { message: 'Welcome to api!' };
 
 app.get('/api', (req, res) => {
@@ -44,7 +25,7 @@ app.post('/login', async (req: TypedRequestBody<User>, res) => {
       res.status(401).send({ message: 'Password is incorrect' });
     } else {
       console.log('found user', user)
-      res.status(200).send({ message: 'user authorized'});
+      res.status(200).send({ message: 'user authorized' });
     }
   } catch (error) {
     res.status(500).send({ message: error.message });
