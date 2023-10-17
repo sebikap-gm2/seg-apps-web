@@ -1,37 +1,38 @@
-import { USERS } from "../../mockData";
 import { Emailer } from "../utils/emailer";
 import { getLeftSideOfEmail } from "../utils/mail";
 import {UserRepository} from "../repositories/user.repository";
+import { User } from "@seg-apps-web/api-interfaces";
+import {Database} from "sqlite3";
 
-const UserBD = UserRepository
 
 export class UserService {
-  static getUserByUsername(username: string) {
-    return UserBD.getByUsername(username, (err, row) => {
-      if (err) {
-        console.error('Error get by username:', err.message);
+  static async getUserByUsername(username: string): Promise<User> {
+    return UserRepository.getByUsername(username).then((user) => {
+      if (user) {
+        return user;
       } else {
-        console.log('User Data:', row);
+        throw new Error('User not found');
       }
-    });
+    }).catch((error) => {
+        throw new Error(`Error fetching user by username: ${error.message}`);
+      });
   }
 
-  static updatePassword(username: string, newPassword: string) {
-    UserBD.updatePassword(username, newPassword, (err) => {
-      if (err) {
-        console.error('Error get by username:', err.message);
-      } else {
-        console.log('Password updated successfully');
-      }
-    });
+  static async updatePassword(username: string, newPassword: string) {
+    try {
+      await UserRepository.updatePassword(username, newPassword);
+    } catch (error) {
+      throw new Error(`Error updating user password: ${error.message}`);
+    }
   }
 
   static async recoverPassword(username: string) {
-    if (this.getUserByUsername(username) === null) {
+    const user = await this.getUserByUsername(username);
+    if (!user) {
       return { ok: false, message: 'User not found' }
     }
     const newPass = getLeftSideOfEmail(username)
-    this.updatePassword(username, newPass)
+    await this.updatePassword(username, newPass)
     const Email = new Emailer()
     const result = await Email.sendRecoverMail(username, newPass)
     if (result) {

@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as cors from 'cors'
 import { TypedRequestBody, User, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
 import { UserService } from './app/services';
+import {UserRepository} from "./app/repositories/user.repository";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const sqlite3 = require('sqlite3').verbose();
 
@@ -10,8 +11,8 @@ app.use(cors())
 app.use(express.json())
 
 const db = new sqlite3.Database(':memory:');
-db.serialize(function () {
-  db.run("CREATE TABLE users (id INT, username TEXT, password TEXT)");
+db.serialize(async function () {
+  await db.run("CREATE TABLE users (id INT, username TEXT, password TEXT)");
 
   // You can add some initial data if needed
   const stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?)");
@@ -22,28 +23,37 @@ db.serialize(function () {
     console.log(row.id, row.username, row.password);
   });
 });
-
+UserRepository.setDatabase(db)
 const greeting = { message: 'Welcome to api!' };
 
 app.get('/api', (req, res) => {
   res.send(greeting);
 });
 
-app.post('/login', (req: TypedRequestBody<User>, res) => {
-  const user = UserService.getUserByUsername(req.body.username)
-  if (!user) {
-    res.status(401).send({ message: 'User not found' })
-    return
+app.post('/login', async (req: TypedRequestBody<User>, res) => {
+  console.log('received POST /login request')
+  try {
+    const user = await UserService.getUserByUsername(req.body.username);
+
+    if (!user) {
+      res.status(401).send({ message: 'User not found' });
+      return;
+    }
+
+    if (user.password !== req.body.password) {
+      res.status(401).send({ message: 'Password is incorrect' });
+    } else {
+      console.log('found user', user)
+      res.status(200).send({ message: 'user authorized'});
+    }
+  } catch (error) {
+    res.status(500).send({ message: error.message });
   }
-  if (user.password !== req.body.password) {
-    res.status(401).send({ message: 'Password is incorrect' })
-  }
-  res.status(200).send(greeting);
 });
 
 app.post('/recover', async (req: TypedRequestBody<UserWithoutPassword>, res) => {
   const user = UserService.getUserByUsername(req.body.username)
-  if (!user) {
+  if (user != null) {
     res.status(401).send({ message: 'User not found' })
     return
   }
