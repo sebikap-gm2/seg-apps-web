@@ -1,21 +1,33 @@
 import { USERS } from "../../mockData";
 import { Emailer } from "../utils/emailer";
 import { getLeftSideOfEmail } from "../utils/mail";
+import {UserRepository} from "../repositories/user.repository";
 
-// TODO: Implement with BD
-let UserBD = [...USERS]
+const UserBD = UserRepository
 
 export class UserService {
   static getUserByUsername(username: string) {
-    return UserBD.find(u => u.username === username)
+    return UserBD.getByUsername(username, (err, row) => {
+      if (err) {
+        console.error('Error get by username:', err.message);
+      } else {
+        console.log('User Data:', row);
+      }
+    });
   }
 
   static updatePassword(username: string, newPassword: string) {
-    UserBD = UserBD.map(u => u.username !== username ? u : { username, password: newPassword })
+    UserBD.updatePassword(username, newPassword, (err) => {
+      if (err) {
+        console.error('Error get by username:', err.message);
+      } else {
+        console.log('Password updated successfully');
+      }
+    });
   }
 
   static async recoverPassword(username: string) {
-    if (!this.getUserByUsername(username)) {
+    if (this.getUserByUsername(username) === null) {
       return { ok: false, message: 'User not found' }
     }
     const newPass = getLeftSideOfEmail(username)

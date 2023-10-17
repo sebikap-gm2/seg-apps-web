@@ -2,10 +2,26 @@ import * as express from 'express';
 import * as cors from 'cors'
 import { TypedRequestBody, User, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
 import { UserService } from './app/services';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 app.use(cors())
 app.use(express.json())
+
+const db = new sqlite3.Database(':memory:');
+db.serialize(function () {
+  db.run("CREATE TABLE users (id INT, username TEXT, password TEXT)");
+
+  // You can add some initial data if needed
+  const stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?)");
+  stmt.run(1, 'user1', 'password1');
+  stmt.finalize();
+
+  db.each("SELECT * FROM users", function (err, row) {
+    console.log(row.id, row.username, row.password);
+  });
+});
 
 const greeting = { message: 'Welcome to api!' };
 
