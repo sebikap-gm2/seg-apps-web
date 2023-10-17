@@ -1,11 +1,9 @@
 import { Emailer } from "../utils/emailer";
 import { getLeftSideOfEmail } from "../utils/mail";
-import {UserRepository} from "../repositories/user.repository";
+import { UserRepository } from "../repositories/user.repository";
 import { User } from "@seg-apps-web/api-interfaces";
-import {Database} from "sqlite3";
 
 const Email = new Emailer()
-
 
 export class UserService {
   static async getUserByUsername(username: string): Promise<User> {
@@ -16,8 +14,8 @@ export class UserService {
         throw new Error('User not found');
       }
     }).catch((error) => {
-        throw new Error(`Error fetching user by username: ${error.message}`);
-      });
+      throw new Error(`Error fetching user by username: ${error.message}`);
+    });
   }
 
   static async updatePassword(username: string, newPassword: string) {
@@ -35,7 +33,6 @@ export class UserService {
     }
     const newPass = getLeftSideOfEmail(username)
     await this.updatePassword(username, newPass)
-    const Email = new Emailer()
     const result = await Email.sendRecoverMail(username, newPass)
     if (result) {
       return { ok: true, message: 'Email Sent' }
