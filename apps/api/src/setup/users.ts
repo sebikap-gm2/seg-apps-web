@@ -1,6 +1,4 @@
-import { v4 } from 'uuid'
 import { USERS } from "./mockData";
-import { UserRepository } from '../app/repositories/user.repository';
 
 export function setupUsers(db) {
   db.serialize(async function () {
@@ -9,15 +7,12 @@ export function setupUsers(db) {
     for (let i = 0; i < USERS.length; i++) {
       const stmt = db.prepare("INSERT INTO users VALUES (?, ?, ?)");
       const user = USERS[i]
-      console.log('INSERTING ' + user.username)
-      stmt.run(v4(), user.username, user.password);
+      stmt.run(user.id, user.username, user.password);
       stmt.finalize();
     }
 
-    db.each("SELECT * FROM users", function (err, row) {
-      console.log(row);
-    });
+    // db.each("SELECT * FROM users", function (err, row) {
+    //   console.log(row);
+    // });
   });
-
-  UserRepository.setDatabase(db)
 }

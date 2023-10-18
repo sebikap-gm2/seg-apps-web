@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as cors from 'cors'
 import { setupUsers } from './users';
 import { setupRoles } from './roles';
+import { RootRepository } from '../app/repositories';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const sqlite3 = require('sqlite3').verbose();
@@ -15,6 +16,8 @@ export function setup() {
 
   setupUsers(db)
   setupRoles(db)
+
+  RootRepository.setDatabase(db)
 
   return app
 }

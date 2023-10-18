@@ -1,6 +1,6 @@
 
 import { TypedRequestBody, User, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
-import { UserService } from './app/services';
+import { RolesService, UserService } from './app/services';
 import { setup } from './setup';
 
 const app = setup()
@@ -21,11 +21,12 @@ app.post('/login', async (req: TypedRequestBody<User>, res) => {
       return;
     }
 
+    const roles = await RolesService.getRolesByUserId(user.id)
+
     if (user.password !== req.body.password) {
       res.status(401).send({ message: 'Password is incorrect' });
     } else {
-      console.log('found user', user)
-      res.status(200).send(user);
+      res.status(200).send({ ...user, roles });
     }
   } catch (error) {
     res.status(500).send({ message: error.message });

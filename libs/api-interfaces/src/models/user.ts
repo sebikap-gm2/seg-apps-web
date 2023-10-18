@@ -12,3 +12,10 @@ export type User = {
 
 export type UserNotCreated = Omit<User, 'id'>
 export type UserWithoutPassword = Omit<User, 'password'>
+
+export type UserRole = {
+  id: string
+  userId: User['id']
+  roleId: Role['id']
+}
+export type UserRoleNotCreated = Omit<UserRole, 'id'>
