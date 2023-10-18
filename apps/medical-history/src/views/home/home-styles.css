@@ -21,8 +21,8 @@
   
   .sidebar {
     /* Agregar un borde alrededor del sidebar */
-  border: 1px solid black; /* 1px de ancho y color negro */
-    width: 200px;
+    border: 1px solid black; /* 1px de ancho y color negro */
+    width: 12%;
     background-color: white;
     color: white;
     padding: 20px;
@@ -47,9 +47,6 @@
   
 /* Añade estos estilos al final de tu archivo home-styles.css o en un archivo CSS separado */
 .custom-table {
-    width: 50%; /* Reducir el ancho de la tabla al 80% del contenedor */
-    margin: 20px 0; /* Cambia el margen superior e inferior a 20px */
-    margin-left: 200px; /* Ajusta el margen izquierdo según el ancho del .sidebar */
     border-collapse: collapse;
   }
   
