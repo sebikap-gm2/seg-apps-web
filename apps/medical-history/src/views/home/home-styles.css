@@ -9,6 +9,8 @@
     /* Agregar un borde alrededor del sidebar */
   border: 1px solid black; /* 1px de ancho y color negro */
   }
+
+
   
   .logo {
     height: 60px;
@@ -45,28 +47,48 @@
     margin-top: 100px; /* Aumenta el margen superior para evitar solapamiento con la navbar */
   }
   
-/* Añade estos estilos al final de tu archivo home-styles.css o en un archivo CSS separado */
+/* Agregar bordes redondeados a la tabla */
 .custom-table {
-    border-collapse: collapse;
-  }
+  border-collapse: collapse;
+  border-radius: 10px; /* Establece un radio de borde redondeado */
+  overflow: hidden; /* Para que los bordes redondeados sean visibles */
+  width: 90%; /* Ancho completo */
+  margin-left: 50px;
+}
+
+.custom-table th,
+.custom-table td {
+  border: 1px solid #b39a9a;
+  padding: 8px;
+  text-align: center;
+}
+
+.custom-table th {
+  background-color: #ff00f2b9;
+  font-weight: bold;
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.custom-table tr:hover {
+  background-color: #ddd;
+}
   
-  .custom-table th,
-  .custom-table td {
-    border: 1px solid #ddd; /* Bordes para las celdas */
-    padding: 8px; /* Espacio interno en las celdas */
-    text-align: center; /* Alineación de texto en el centro */
-  }
-  
-  .custom-table th {
-    background-color: #f2f2f2; /* Color de fondo para los encabezados */
-    font-weight: bold; /* Texto en negrita en los encabezados */
-  }
-  
-  .custom-table tr:nth-child(even) {
-    background-color: #f2f2f2; /* Color de fondo para filas pares */
-  }
-  
-  .custom-table tr:hover {
-    background-color: #ddd; /* Color de fondo en hover */
-  }
-  
+  /* Agrega estilos al párrafo */
+.title {
+  font-size: 19px; /* Tamaño de fuente personalizado */
+  color: #333; /* Color de texto personalizado */
+  margin-top: 20px; /* Margen superior personalizado */
+  margin-left: 10px;
+  line-height: 1.5; /* Espaciado entre líneas personalizado */
+}
+
+.paragraph {
+  font-size: 17px; /* Tamaño de fuente personalizado */
+  color: #6b6a6a; /* Color de texto personalizado */
+
+  margin-left: 10px;
+  line-height: 1.5; /* Espaciado entre líneas personalizado */
+}

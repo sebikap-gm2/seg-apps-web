@@ -42,9 +42,7 @@ const Register = () => {
                     <div className="logo">
                         <img src="../assets/Medicare.png" alt="Logo" />
                     </div>
-                    <div className="fadeIn first">
-                        <i className="bi bi-person" style={{ fontSize: '1.2rem' }}></i>
-                    </div>
+
 
                     <input type="text" id="name" className="fadeIn second" name="register" placeholder="Nombre" onChange={(event) => setNombre(event.target.value)} />
                     <input type="text" id="lastname" className="fadeIn third" name="register" placeholder="Apellido" onChange={(event) => setApellido(event.target.value)} />

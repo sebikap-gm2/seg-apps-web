@@ -34,9 +34,6 @@ const ForgotPassword = () => {
         <div className="logo">
           <img src="../assets/Medicare.png" alt="Logo" />
         </div>
-        <div className="fadeIn first">
-          <i className="bi bi-person" style={{ fontSize: '1.2rem' }}></i>
-        </div>
 
         <input
           type="text"
