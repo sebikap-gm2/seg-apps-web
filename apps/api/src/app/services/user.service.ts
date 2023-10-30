@@ -11,7 +11,7 @@ export class UserService {
       if (user) {
         return user;
       } else {
-        throw new Error('User not found');
+        return null
       }
     }).catch((error) => {
       throw new Error(`Error fetching user by username: ${error.message}`);

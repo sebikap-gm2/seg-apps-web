@@ -34,13 +34,13 @@ app.post('/login', async (req: TypedRequestBody<User>, res) => {
 });
 
 app.post('/recover', async (req: TypedRequestBody<UserWithoutPassword>, res) => {
-  const user = UserService.getUserByUsername(req.body.username)
-  if (user != null) {
-    res.status(401).send({ message: 'User not found' })
+  const user = await UserService.getUserByUsername(req.body.username)
+  if (user == null) {
+    res.status(404).send({ message: 'User not found' })
     return
   }
   const { ok, message } = await UserService.recoverPassword(req.body.username)
-  const status = ok ? 200 : 401
+  const status = ok ? 200 : 404
   res.status(status).send({ message })
 })
 
