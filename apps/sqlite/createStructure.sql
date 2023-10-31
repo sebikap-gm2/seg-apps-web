@@ -26,6 +26,7 @@ CREATE TABLE historial(
     id_profesional INTEGER,
     id_paciente INTEGER,
     fecha DATETIME NOT NULL,
+    tipo_atencion TEXT NOT NULL,
     observaciones TEXT NOT NULL,
     FOREIGN KEY(id_profesional) REFERENCES [users] (id),
     FOREIGN KEY(id_paciente) REFERENCES [users] (id)
@@ -49,9 +50,10 @@ INSERT INTO user_roles(userId, roleId) VALUES ((SELECT id from users where usern
 INSERT INTO user_roles(userId, roleId) VALUES ((SELECT id from users where username = 'drperez@gmail.com'), (SELECT id from roles where title='Doctor'));
 GO
 
-INSERT INTO historial(id_profesional, id_paciente, fecha, observaciones) VALUES (
+INSERT INTO historial(id_profesional, id_paciente, fecha, tipo_atencion, observaciones) VALUES (
     (SELECT id from users where username = 'drperez@gmail.com'),
     (SELECT id from users where username = 'skaplanski@frba.utn.edu.ar'),
     DATETIME('now'),
-    'Consulta Medica'
+    'Consulta Medica',
+    'Paciente vino a realizar control general'
 );
