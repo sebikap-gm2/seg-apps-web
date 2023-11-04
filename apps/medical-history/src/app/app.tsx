@@ -5,6 +5,7 @@ import Profile from '../views/profile/profile';
 import ForgotPassword from '../views/forgotPassword/forgotPassword';
 import Register from '../views/register/Register';
 import NotFound from '../views/notfound/notfound';
+import { MyHistory } from '../views/myHistory/MyHistory';
 
 export const App = () => {
   return (
@@ -15,6 +16,7 @@ export const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/myHistory/:userId" element={<MyHistory />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

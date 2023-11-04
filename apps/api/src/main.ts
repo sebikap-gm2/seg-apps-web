@@ -1,5 +1,5 @@
 
-import { MedicalHistory, TypedRequestBody, TypedRequestQuery, User, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
+import { MedicalHistory, Role, TypedRequestBody, TypedRequestQuery, User, UserRole, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
 import { RolesService, UserService } from './app/services';
 import { setup } from './setup';
 import { MedicalHistoryService } from './app/services/medicalHistory.service';
@@ -45,14 +45,26 @@ app.post('/recover', async (req: TypedRequestBody<UserWithoutPassword>, res) => 
   res.status(status).send({ message })
 })
 
-app.get('/observations', async (req: TypedRequestQuery<{}>, res) => {
+app.get('/users', async (req, res) => {
+  const userSearch = req.query.userSearch as string;
+  const users = await UserService.findUsernameLike(userSearch)
+  console.log({ userSearch, users })
+  /*   if (medicalHistories == null) {
+      res.status(404).send({ message: 'User not found' })
+      return
+    } */
+
+  res.status(200).send(users)
+})
+
+app.get('/observations', async (req: TypedRequestQuery<{ medicalHistories: MedicalHistory[] }>, res) => {
   const medicalHistories = await MedicalHistoryService.getAll()
   /*   if (medicalHistories == null) {
       res.status(404).send({ message: 'User not found' })
       return
     } */
 
-  res.status(200).send({ medicalHistories })
+  res.status(200).send(medicalHistories)
 })
 
 app.get('/observations/:userId', async (req: TypedRequestQuery<{ userId: string }>, res) => {
@@ -71,7 +83,7 @@ app.post('/observations/update', async (req: TypedRequestBody<MedicalHistory>, r
   const ok = await MedicalHistoryService.create(req.body)
 
   const status = ok ? 200 : 404
-  res.status(status).send({ok})
+  res.status(status).send({ ok })
 })
 
 

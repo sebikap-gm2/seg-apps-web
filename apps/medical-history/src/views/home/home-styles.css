@@ -17,26 +17,22 @@
   }
   
   .content {
-    display: 100%;
-    margin-top: 100px; /* Aumenta el margen superior para evitar solapamiento con la navbar */
+    display: flex;
+    flex: 1;
   }
   
   .sidebar {
     /* Agregar un borde alrededor del sidebar */
     border: 1px solid black; /* 1px de ancho y color negro */
-    width: 12%;
     background-color: white;
+    display: flex;
+    flex-direction: column;
     color: white;
     padding: 20px;
-    position: fixed;
-    top: 80px; /* Ajusta la posición de la barra lateral debajo de la navbar */
-    bottom: 0;
-    left: 0;
   }
   
   .sidebar a {
     
-    display: block;
     color: black;
     text-decoration: none;
     margin-bottom: 10px;

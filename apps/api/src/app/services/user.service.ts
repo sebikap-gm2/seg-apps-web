@@ -40,4 +40,16 @@ export class UserService {
       return { ok: false, message: 'There was an issue sending the email' }
     }
   }
+
+  static async findUsernameLike(usernameLike: string): Promise<User[]> {
+    return UserRepository.findUsernameLike(usernameLike).then((users) => {
+      if (users) {
+        return users;
+      } else {
+        return null
+      }
+    }).catch((error) => {
+      throw new Error(`Error fetching user by username: ${error.message}`);
+    });
+  }
 }

@@ -9,10 +9,10 @@ export function setCookie(title: string, record: Record<string, unknown>, expire
   document.cookie = `${title}=${JSON.stringify(record)};${expires ? expires + ';' : ''}path=/`;
 }
 
-export function getCookie(title: string) {
+export function getCookie<T>(title: string) {
   const cookies = decodeURIComponent(document.cookie).split(';')
   const cookie = cookies.find(cookie => cookie.split('=')[0] === title)
   if (!cookie) return undefined
   const [, value] = cookie.split('=')
-  return JSON.parse(value)
+  return JSON.parse(value) as T
 }
