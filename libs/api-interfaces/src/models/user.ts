@@ -8,6 +8,8 @@ export type User = {
   id: string
   username: string
   password: string
+  name: string
+  lastName: string
 }
 
 export type UserNotCreated = Omit<User, 'id'>

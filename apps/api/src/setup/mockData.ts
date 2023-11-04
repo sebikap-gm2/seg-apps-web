@@ -8,8 +8,8 @@ export const ROLES: Role[] = roleTitles.map((title, i) => ({
 }))
 
 const usersNotCreated: UserNotCreated[] = [
-  { username: 'skaplanski@frba.utn.edu.ar', password: 'admin123' },
-  { username: 'admin@gmail.com', password: 'admin123' },
+  // { username: 'skaplanski@frba.utn.edu.ar', password: 'admin123' },
+  // { username: 'admin@gmail.com', password: 'admin123' },
 ]
 
 export const USERS = usersNotCreated.map((user, i) => ({
