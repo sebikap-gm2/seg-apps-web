@@ -1,22 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './home-styles.css';
 import Table from 'react-bootstrap/Table';
 import Modal from 'react-bootstrap/Modal'; // Importa el componente Modal de Bootstrap
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Button from 'react-bootstrap/Button';
+import { HTTP, getCookie } from '../../services';
+import { MedicalHistory } from '@seg-apps-web/api-interfaces';
 
+const http = new HTTP('http://localhost:3333');
 
 
 const Home = () => {
-  const [observacion, setObservacion] = useState(''); // Nuevo estado para la observación
-  const [itemSeleccionado, setItemSeleccionado] = useState<number | null>(null); // Especifica el tipo number
+  const [observation, setObservacion] = useState(''); // Nuevo estado para la observación
+  const [medicalHistoryEntryId, setMedicalHistoryEntryId] = useState<number | null>(null); // Especifica el tipo number
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    ; (async () => {
+      const user = getCookie("user");
+      const res = await http.get<MedicalHistory[]>('/observations/'+user.id);
+      console.log(res);
+    })()
+
+  }, [])
 
   // Función para mostrar el modal al hacer clic en el botón
   const handleButtonClick = (id: number) => { // Especifica el tipo number
-    setItemSeleccionado(id);
+    setMedicalHistoryEntryId(id);
     setShowModal(true);
   };
+
+  const handleSave = async () => {
+    const cookie = getCookie('user');
+    
+    const res = await http.post<boolean>('/observations/update', {
+      userId: cookie.id,
+      //medicalHistoryEntryId,
+      id:1,
+      attentionType: "consulta medica",
+      doctorId: "3",
+      observation
+    });
+
+  }
 
   const handleCloseModal = () => {
     //ir a la base y guardar la observacion.
@@ -105,13 +131,13 @@ const Home = () => {
             <Modal.Body>
               <input
                 type="text"
-                value={observacion}
+                value={observation}
                 onChange={(e) => setObservacion(e.target.value)}
                 placeholder="Escribe tu observación aquí"
               />
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseModal}>
+              <Button variant="secondary" onClick={handleSave}>
                 Guardar
               </Button>
             </Modal.Footer>
