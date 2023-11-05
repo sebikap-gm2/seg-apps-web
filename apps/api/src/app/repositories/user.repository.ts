@@ -30,13 +30,15 @@ export class UserRepository {
         const entries = stringData.split('\n')
         const mappedEntries = entries.map(e => e.split('|'))
         const users: User[] = mappedEntries.map(u => {
-          const [id, username, password, name, lastName] = u
+          const [id, username, password, name, lastName,age,gender] = u
           return {
             id,
             username,
             password,
             name,
-            lastName
+            lastName,
+            age,
+            gender
           }
         }).filter(u => u.id)
 
