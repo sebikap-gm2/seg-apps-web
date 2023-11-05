@@ -37,7 +37,7 @@ export const Layout = ({ children }: LayoutProps) => {
           <a href="/home">Inicio</a>
           <a href={`/myHistory/${user.id}`}>Mi historial</a>
         </div>
-        <div style={{ flex: 1, flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
           {children}
         </div>
       </div>
