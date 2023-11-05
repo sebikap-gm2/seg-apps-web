@@ -1,6 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { getCookie } from "../../services";
 import { User } from "@seg-apps-web/api-interfaces";
+import { useNavigate } from "react-router-dom";
 
 interface LayoutProps {
   children: ReactNode
@@ -8,6 +9,12 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   const user = getCookie<User>("user");
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!user) navigate('/')
+  }, [user])
+
   if (!user) return null
 
 

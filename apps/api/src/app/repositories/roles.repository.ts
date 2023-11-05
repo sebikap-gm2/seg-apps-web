@@ -1,10 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import { Role, UserRole } from "@seg-apps-web/api-interfaces";
+import { Role, User, UserRole } from "@seg-apps-web/api-interfaces";
 import { RootRepository } from "./root.repository";
 
 export class RoleRepository {
-
-
   static async getAll(): Promise<Role[]> {
     const sql = 'SELECT * FROM roles';
     return await new Promise((resolve, reject) => {
@@ -30,6 +28,19 @@ export class RoleRepository {
           resolve(rows);
         } else {
           resolve(null);
+        }
+      });
+    });
+  }
+
+  static async addDefaultRoleToUser(userId: User['id']): Promise<boolean> {
+    const sql = `INSERT INTO user_roles(userId, roleId) VALUES ('${userId}', (SELECT id from roles where title='Patient'))`;
+    return await new Promise((resolve, reject) => {
+      RootRepository.database.run(sql, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(true);
         }
       });
     });

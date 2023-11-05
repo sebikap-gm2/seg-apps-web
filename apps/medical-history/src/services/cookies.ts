@@ -4,6 +4,10 @@ function getExpiration(expireAfterDays: number) {
   return "expires=" + d.toUTCString();
 }
 
+export function deleteCookie(title: string) {
+  document.cookie = title +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 export function setCookie(title: string, record: Record<string, unknown>, expireAfterDays?: number) {
   const expires = expireAfterDays ? getExpiration(expireAfterDays) : ''
   document.cookie = `${title}=${JSON.stringify(record)};${expires ? expires + ';' : ''}path=/`;

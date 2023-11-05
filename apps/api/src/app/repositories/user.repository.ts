@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import { User } from "@seg-apps-web/api-interfaces";
+import { User, UserNotCreated } from "@seg-apps-web/api-interfaces";
 import { RootRepository } from "./root.repository";
 import { spawn } from 'node:child_process'
 
@@ -66,5 +66,18 @@ export class UserRepository {
         }
       });
     });
+  }
+
+  static async register(user: UserNotCreated) {
+    const sql = `INSERT INTO users (username, password, name, lastName) VALUES ('${user.username}', '${user.password}', '${user.name}', '${user.lastName}')`
+    return new Promise<boolean>((resolve, reject) => {
+      RootRepository.database.run(sql, (err) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(true)
+        }
+      })
+    })
   }
 }

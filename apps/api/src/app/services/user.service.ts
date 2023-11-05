@@ -1,7 +1,8 @@
 import { Emailer } from "../utils/emailer";
 import { getLeftSideOfEmail } from "../utils/mail";
 import { UserRepository } from "../repositories/user.repository";
-import { User } from "@seg-apps-web/api-interfaces";
+import { User, UserNotCreated } from "@seg-apps-web/api-interfaces";
+import { RolesService } from "./roles.service";
 
 const Email = new Emailer()
 
@@ -38,6 +39,17 @@ export class UserService {
       return { ok: true, message: 'Email Sent' }
     } else {
       return { ok: false, message: 'There was an issue sending the email' }
+    }
+  }
+
+  static async register(user: UserNotCreated) {
+    try {
+      await UserRepository.register(user);
+      const newUser = await UserRepository.getByUsername(user.username)
+      await RolesService.addDefaultRoleToUser(newUser.id)
+      return newUser
+    } catch (error) {
+      throw new Error(`Error inserting user: ${error.message}`);
     }
   }
 

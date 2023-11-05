@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import './login-styles.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { HTTP, getCookie, setCookie } from '../../services';
+import { HTTP, deleteCookie, getCookie, setCookie } from '../../services';
 import { User } from '@seg-apps-web/api-interfaces';
 
 const http = new HTTP('http://localhost:3333');
@@ -11,6 +11,10 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [warningMessage, setWarningMessage] = useState('');
+
+  useEffect(() => {
+    deleteCookie('user')
+  }, [])
 
   const logIn = async () => {
     const res = await http.post<User>('/login', {

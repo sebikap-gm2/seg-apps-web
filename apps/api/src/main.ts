@@ -1,5 +1,5 @@
 
-import { MedicalHistory, Role, TypedRequestBody, TypedRequestQuery, User, UserRole, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
+import { MedicalHistory, Role, TypedRequestBody, TypedRequestQuery, User, UserNotCreated, UserRole, UserWithoutPassword } from '@seg-apps-web/api-interfaces';
 import { RolesService, UserService } from './app/services';
 import { setup } from './setup';
 import { MedicalHistoryService } from './app/services/medicalHistory.service';
@@ -33,6 +33,20 @@ app.post('/login', async (req: TypedRequestBody<User>, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+
+app.post('/register', async (req: TypedRequestBody<UserNotCreated>, res) => {
+  const user = await UserService.getUserByUsername(req.body.username)
+  if (user) {
+    res.status(401).send({ message: 'User already exists' })
+    return
+  }
+  const newUser = await UserService.register(req.body)
+  if (newUser) {
+    res.status(200).send({ message: 'user created', user: newUser })
+  } else {
+    res.status(400).send({ message: 'an error has ocurred' })
+  }
+})
 
 app.post('/recover', async (req: TypedRequestBody<UserWithoutPassword>, res) => {
   const user = await UserService.getUserByUsername(req.body.username)
