@@ -4,6 +4,7 @@ export type MedicalHistory = {
     doctorId: string
     attentionType: string
     observation: string
+    creationDate: string
   }
 
 export type MedicalHistoryCreation=Omit<MedicalHistory,"id">
