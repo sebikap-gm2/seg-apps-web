@@ -27,8 +27,8 @@ export const Layout = ({ children }: LayoutProps) => {
           className="logo"
         />
 
-        <a href="/profile" className="profile">
-          Perfil
+        <a href="/">
+          Log out
         </a>
       </nav>
 
