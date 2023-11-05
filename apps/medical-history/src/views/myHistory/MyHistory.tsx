@@ -6,6 +6,7 @@ import { MedicalHistoryEntry } from "./MedicalHistoryEntry";
 import { useParams } from "react-router-dom";
 import { Layout } from "../../components";
 import { UserSearch } from "./UserSearch";
+import AddHistoryEntry from "./AddHistoryEntry";
 
 const http = new HTTP('http://localhost:3333');
 
@@ -80,7 +81,7 @@ export const MyHistory = () => {
         <Modal.Body>
           <input
             type="text"
-            value={medicalHistories.find(m => m.id === selectedMedicalHistoryId)?.observation}
+            value={observation || medicalHistories.find(m => m.id === selectedMedicalHistoryId)?.observation}
             onChange={(e) => setObservation(e.target.value)}
             placeholder="Escribe tu observación aquí"
           />
@@ -91,6 +92,7 @@ export const MyHistory = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {user.roles.includes('Doctor') ? <AddHistoryEntry userId={userId} selectedPatientId={selectedUserId}/> : null}
     </Layout>
   )
 }

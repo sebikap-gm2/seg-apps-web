@@ -6,7 +6,7 @@ import { User, UserNotCreated } from '@seg-apps-web/api-interfaces';
 const http = new HTTP('http://localhost:3333')
 
 const Register = () => {
-  const [user, setUser] = useState<UserNotCreated>({ name: '', lastName: '', username: '', password: '' })
+  const [user, setUser] = useState<UserNotCreated>({ name: '', lastName: '', username: '', password: '', age: '', gender:''})
   const [contraseñaRepetida, setContraseñaRepetida] = useState("")
   const [warningMessage, setWarningMessage] = useState('');
   const [recuperoMessage, setRecuperoMessage] = useState('');

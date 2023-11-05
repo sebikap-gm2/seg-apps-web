@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import { MedicalHistory, MedicalHistoryCreation, Role, UserRole } from "@seg-apps-web/api-interfaces";
+import { MedicalHistory } from "@seg-apps-web/api-interfaces";
 import { RootRepository } from "./root.repository";
-import { spawn } from 'node:child_process'
 
 export class MedicalHistoryRepository {
 
@@ -37,10 +36,10 @@ export class MedicalHistoryRepository {
     });
   }
 
-  static async create(data: MedicalHistory): Promise<MedicalHistory[]> {
+  static async update(data: MedicalHistory): Promise<MedicalHistory[]> {
     return await new Promise((resolve, reject) => {
-      // RootRepository.database.run(`UPDATE historial SET observaciones='${data.observation}' WHERE id=${parseInt(data.id)}`,{}, 
-      const result = RootRepository.database.all(`SELECT * FROM users`,
+      const sql = `UPDATE historial SET observaciones='${data.observation}' WHERE id=${parseInt(data.id)}`;
+      RootRepository.database.run(sql,
         (err, result) => {
           console.log({ result, err })
           if (err) {
@@ -48,29 +47,31 @@ export class MedicalHistoryRepository {
             reject(err);
           } else if (result) {
             console.log(2)
-            // console.log(1,rows);
-            //  resolve(result);
           } else {
             console.log(3)
-            // console.log(2,rows);
-            //resolve([]);
           }
         });
-      // console.log(4, result.);
       resolve([]);
-      /*   RootRepository.database.run(sql, [data.doctorId,data.userId,data.attentionType,data.observation], (err, rows) => {
-          if (err) {
-            reject(err);
-          } else if (rows) {
-            resolve(rows);
-          } else {
-            resolve([]);
-          }
-        }); */
     });
   }
 
-
-
-
+  static async create(data: MedicalHistory): Promise<MedicalHistory[]> {
+    return await new Promise((resolve, reject) => {
+      const sql = `INSERT INTO historial(doctorId, userId, creationDate, attentionType, observation)
+                        VALUES ('${data.doctorId}','${data.userId}', '${data.creationDate}', '${data.attentionType}', '${data.observation}')`;
+      RootRepository.database.run(sql,
+        (err, result) => {
+          console.log({ result, err })
+          if (err) {
+            console.log('error creating history',err)
+            reject(err);
+          } else if (result) {
+            console.log(result)
+          } else {
+            console.log(3)
+          }
+        });
+      resolve([]);
+    });
+  }
 }

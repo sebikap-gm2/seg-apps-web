@@ -4,12 +4,14 @@
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
+    "start-api": "nx serve api",
     "build": "nx build",
     "test": "nx test"
   },
   "private": true,
   "dependencies": {
     "@types/cors": "^2.8.14",
+    "@types/react-modal": "^3.16.2",
     "bootstrap": "^5.3.2",
     "bootstrap-icons": "^1.11.1",
     "core-js": "^3.6.5",
@@ -19,6 +21,7 @@
     "react": "18.2.0",
     "react-bootstrap": "^2.9.0",
     "react-dom": "18.2.0",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.16.0",
     "regenerator-runtime": "0.13.7",
     "sqlite3": "^5.1.6",
