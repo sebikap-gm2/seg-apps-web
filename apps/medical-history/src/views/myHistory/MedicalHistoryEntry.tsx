@@ -8,7 +8,7 @@ interface MedicalHistoryEntryProps {
 export const MedicalHistoryEntry = ({ medicalHistoryEntry, onClick }: MedicalHistoryEntryProps) => {
   return (
     <tr>
-      {/* <td>{medicalHistoryEntry.date}</td> */}
+      <td>{new Date(medicalHistoryEntry.creationDate).toLocaleDateString()}</td>
       <td>{medicalHistoryEntry.attentionType}</td>
       {/* <td>{getDoctorById(medicalHistoryEntry.doctorId)}</td> */}
       <td>{medicalHistoryEntry.doctorId}</td>
