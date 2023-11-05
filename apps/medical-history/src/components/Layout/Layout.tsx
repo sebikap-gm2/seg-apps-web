@@ -19,7 +19,7 @@ export const Layout = ({ children }: LayoutProps) => {
 
 
   return (
-    <div style={{ backgroundColor: "#f6f6f6", display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div style={{ backgroundColor: "#f6f6f6", display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <nav className="navbar">
         <img
           src="../assets/Medicare-sin-fondo.png"
