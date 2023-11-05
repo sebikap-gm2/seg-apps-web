@@ -57,7 +57,7 @@ export const MyHistory = () => {
   return (
     <Layout>
       <p className="title">
-        Historial de Atenciones para:<span style={{ fontWeight: "bold" }}>{user?.name ?? ''}</span>
+        Historial de Atenciones para: <span style={{ fontWeight: "bold" }}>{user.name} {user.lastName}</span>
       </p>
       {user.roles.includes('Doctor') ? <UserSearch onSelectUser={setSelectedUserId} /> : null}
       <Table responsive className="custom-table">
