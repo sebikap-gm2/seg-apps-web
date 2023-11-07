@@ -93,7 +93,7 @@ app.get('/observations/:userId', async (req: TypedRequestQuery<{ userId: string 
 })
 
 
-app.post('/observations/update', async (req: TypedRequestBody<MedicalHistory>, res) => {
+app.post('/medicalHistory/create', async (req: TypedRequestBody<MedicalHistory>, res) => {
   const ok = await MedicalHistoryService.create(req.body)
 
   const status = ok ? 200 : 404

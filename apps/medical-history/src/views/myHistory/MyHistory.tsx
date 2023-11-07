@@ -20,79 +20,103 @@ export const MyHistory = () => {
 
   const [selectedUserId, setSelectedUserId] = useState<User['id']>()
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     ; (async () => {
-      console.log(selectedUserId ? selectedUserId : userId)
-      const medicalHistoriesRes = await http.get<{ medicalHistories: MedicalHistory[] }>(`/observations/${selectedUserId ? selectedUserId : userId}`);
-      if (medicalHistoriesRes.ok) {
-        console.log(medicalHistoriesRes)
-        setMedicalHistories(medicalHistoriesRes.payload.medicalHistories)
-      }
-    })()
+      await fetchMedicalHistory();
+    }
+    )()
 
   }, [selectedUserId])
 
-  const handleOpenObservation = (id: MedicalHistory['id']) => setSelectedMedicalHistoryId(id);
 
-  const handleCloseModal = () => {
-    setSelectedMedicalHistoryId(undefined);
-    setObservation('')
-  };
-
-
-  const handleSave = async () => {
-    const res = await http.post<boolean>('/observations/update', {
-      userId,
-      //medicalHistoryEntryId,
-      id: 1,
-      attentionType: "consulta medica",
-      doctorId: "3",
-      observation
-    });
-
+  const fetchMedicalHistory = async () => {
+    console.log(selectedUserId ? selectedUserId : userId)
+    setSelectedUserId(selectedUserId);
+    const medicalHistoriesRes = await http.get<{ medicalHistories: MedicalHistory[] }>(`/observations/${selectedUserId ? selectedUserId : userId}`);
+    if (medicalHistoriesRes.ok) {
+      console.log(medicalHistoriesRes)
+      setMedicalHistories(medicalHistoriesRes.payload.medicalHistories)
+    }
   }
 
-  if (!user) return null
+    const handleOpenObservation = (id: MedicalHistory['id']) => setSelectedMedicalHistoryId(id);
 
-  return (
-    <Layout>
-      <p className="title">
-        Historial de Atenciones para: <span style={{ fontWeight: "bold" }}>{user.name} {user.lastName}</span>
-      </p>
-      {user.roles.includes('Doctor') ? <UserSearch onSelectUser={setSelectedUserId} /> : null}
-      <Table responsive className="custom-table">
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Tipo Atencion</th>
-            <th>Profesional</th>
-            <th>Observaciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {medicalHistories.map(medicalHistoryEntry => <MedicalHistoryEntry medicalHistoryEntry={medicalHistoryEntry} onClick={handleOpenObservation} />)}
-        </tbody>
-      </Table>
-      <Modal show={!!selectedMedicalHistoryId} onHide={handleCloseModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Observación</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <input
-            type="text"
-            value={observation || medicalHistories.find(m => m.id === selectedMedicalHistoryId)?.observation}
-            onChange={(e) => setObservation(e.target.value)}
-            placeholder="Escribe tu observación aquí"
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleSave}>
-            Guardar
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      {user.roles.includes('Doctor') ? <AddHistoryEntry userId={userId} selectedPatientId={selectedUserId}/> : null}
-    </Layout>
-  )
-}
+    const handleCloseModal = () => {
+      setSelectedMedicalHistoryId(undefined);
+      setObservation('')
+    };
+
+
+    const openModal = () => {
+      setIsModalOpen(true);
+    };
+
+    const closeModal = async() => {
+  
+      setIsModalOpen(false);
+
+    };
+
+    const handleSave = async () => {
+      const res = await http.post<boolean>('/observations/update', {
+        userId,
+        //medicalHistoryEntryId,
+        id: 1,
+        attentionType: "consulta medica",
+        doctorId: "3",
+        observation
+      });
+
+    }
+
+    if (!user) return null
+
+    return (
+      <Layout>
+        <p className="title">
+          Historial de Atenciones para: <span style={{ fontWeight: "bold" }}>{user.name} {user.lastName}</span>
+        </p>
+        {user.roles.includes('Doctor') ? <UserSearch onSelectUser={setSelectedUserId} /> : null}
+        <Table responsive className="custom-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tipo Atencion</th>
+              <th>Profesional</th>
+              <th>Observaciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {medicalHistories.map(medicalHistoryEntry => <MedicalHistoryEntry medicalHistoryEntry={medicalHistoryEntry} onClick={handleOpenObservation} />)}
+          </tbody>
+        </Table>
+        <Modal show={!!selectedMedicalHistoryId} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Observación</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <input
+              type="text"
+              value={observation || medicalHistories.find(m => m.id === selectedMedicalHistoryId)?.observation}
+              onChange={(e) => setObservation(e.target.value)}
+              placeholder="Escribe tu observación aquí"
+            />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleSave}>
+              Guardar
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        {user.roles.includes('Doctor') ? (<AddHistoryEntry
+          userId={userId}
+          selectedPatientId={selectedUserId}
+          openModal={openModal}
+          closeModal={closeModal}
+          isModalOpen={isModalOpen}
+          fetchMedicalHistory={fetchMedicalHistory} />) : null}
+      </Layout>
+    )
+  }

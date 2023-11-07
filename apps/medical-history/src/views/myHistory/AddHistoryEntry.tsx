@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { HTTP, deleteCookie, getCookie, setCookie } from '../../services';
+import { MedicalHistoryCreation, User } from '@seg-apps-web/api-interfaces';
 
 // Initialize the modal
 Modal.setAppElement('#root'); // Set the app root element for accessibility
@@ -9,42 +10,46 @@ Modal.setAppElement('#root'); // Set the app root element for accessibility
 const http = new HTTP('http://localhost:3333')
 
 // @ts-ignore
-function AddHistoryEntry({ userId, selectedPatientId }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function AddHistoryEntry({ userId, selectedPatientId,openModal,closeModal,isModalOpen,fetchMedicalHistory }) {
+
   const [date, setDate] = useState('');
   const [attentionType, setAttentionType] = useState('');
   const [observation, setObservation] = useState('');
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
 
   const handleSave = (userId: string, selectedPatientId: string) => {
+
     // Perform your save logic here with the 'infoToSave' state
     // For simplicity, we're just displaying the saved info in the console
     console.log('Info saved:');
-    const body = {
+
+
+    const body: MedicalHistoryCreation = {
       userId: selectedPatientId,
       attentionType: attentionType,
       doctorId: userId,
       observation: observation,
       creationDate: date
     };
-    http.post<boolean>('/observations/update', body).then(res => console.log("history saved", res)).catch(err => console.log("failed to save history",err));
+    console.log(body);
+
+    http.post<boolean>('/medicalHistory/create', body).then(async (res) => {
+      console.log("history saved", res)
+      await fetchMedicalHistory();
+  }).catch(err => console.log("failed to save history", err));
     // Close the modal
+
     closeModal();
-    window.location.reload();
+
   };
 
 
-  const bottomMargin = {margin: '16px'};
+  const bottomMargin = { margin: '16px' };
+
+
   return (
     <div>
-      <button onClick={openModal} style={{margin: '36px'}}>Agregar entrada</button>
+      <button onClick={openModal} style={{ margin: '36px' }}>Agregar entrada</button>
 
       <Modal
         isOpen={isModalOpen}
@@ -79,9 +84,9 @@ function AddHistoryEntry({ userId, selectedPatientId }) {
           onChange={(e) => setObservation(e.target.value)}
           style={bottomMargin}
         />
-        <div  style={bottomMargin}>
-          <button onClick={() => handleSave(userId, selectedPatientId)} style={ { margin: '4px 16px' }}>Guardar</button>
-          <button onClick={closeModal} style={ { margin: '4px 16px' }}>Cerrar</button>
+        <div style={bottomMargin}>
+          <button onClick={() => handleSave(userId, selectedPatientId)} style={{ margin: '4px 16px' }}>Guardar</button>
+          <button onClick={closeModal} style={{ margin: '4px 16px' }}>Cerrar</button>
         </div>
       </Modal>
     </div>
