@@ -38,27 +38,27 @@ CREATE TABLE historial(
 GO
 
 INSERT INTO users (username,  password, name, lastName) VALUES ('admin','afDV-E21!+c.', 'Admin', 'Admin');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('skaplanski@frba.utn.edu.ar','seba', 'Sebastian', 'Kaplanski', 25, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('gramirez@gmail.com','gonza123', 'Gonzalo', 'Ramirez',34, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('mdiaz@gmail.com','madiaz', 'Mariano', 'Diaz', 42, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('alopez@gmail.com','aguslo', 'Agustin', 'Lopez', 22, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('ngarcia@gmail.com','ngarcia', 'Natalia', 'Garcia', 41, 'F');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('csosa@gmail.com','casosa', 'Catalina', 'Sosa', 68, 'F');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('calvarez@gmail.com','calvar', 'Cristina', 'Alvarez', 32, 'F');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('ltorres@gmail.com','ltorre', 'Luciano', 'Torres', 18, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('aruiz@gmail.com','arui', 'Alan', 'Ruiz', 14, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('gbenitez@gmail.com','gabenit', 'Gabriela', 'Benitez', 28, 'F');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drperez@gmail.com','aperez', 'Alfonso', 'Perez', 41, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drgomez@gmail.com','mgomez', 'Matias', 'Gomez', 34, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drgonzalez@gmail.com','marcgonzalez', 'Marcos', 'Gonzalez', 39, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drrodriguez@gmail.com','jrodri', 'Jorge', 'Rodriguez', 53, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('dralfonso@gmail.com','lucalfon', 'Lucas', 'Alfonso', 27, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drfernandez@gmail.com','pafern', 'Pablo', 'Fernandez', 33, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('dralonso@gmail.com','maralo', 'Martin', 'Alonso',  37, 'M');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drafuentes@gmail.com','martfuen', 'Martina', 'Fuentes', 28, 'F');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drarojas@gmail.com','carojas', 'Camila', 'Rojas', 57, 'F');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('dramartinez@gmail.com','lumart', 'Lucila', 'Martinez',  37, 'F');
-INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('draromero@gmail.com','ludromer', 'Ludmila', 'Romero',  42, 'F');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('sebastian.kaplanski@frba.utn.edu.ar','seba', 'Sebastian', 'Kaplanski', 25, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('gonzalo.ramirez@gmail.com','gonza123', 'Gonzalo', 'Ramirez',34, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('mariano.diaz@gmail.com','madiaz', 'Mariano', 'Diaz', 42, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('agustin.lopez@gmail.com','aguslo', 'Agustin', 'Lopez', 22, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('natalia.garcia@gmail.com','ngarcia', 'Natalia', 'Garcia', 41, 'F');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('catalina.sosa@gmail.com','casosa', 'Catalina', 'Sosa', 68, 'F');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('cristina.alvarez@gmail.com','calvar', 'Cristina', 'Alvarez', 32, 'F');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('luciano.torres@gmail.com','ltorre', 'Luciano', 'Torres', 18, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('alan.ruiz@gmail.com','arui', 'Alan', 'Ruiz', 14, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('gabriela.benitez@gmail.com','gabenit', 'Gabriela', 'Benitez', 28, 'F');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('dralfonso.perez@gmail.com','aperez', 'Alfonso', 'Perez', 41, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drmatias.gomez@gmail.com','mgomez', 'Matias', 'Gomez', 34, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drmarcos.gonzalez@gmail.com','marcgonzalez', 'Marcos', 'Gonzalez', 39, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drjorge.rodriguez@gmail.com','jrodri', 'Jorge', 'Rodriguez', 53, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drlucas.alfonso@gmail.com','lucalfon', 'Lucas', 'Alfonso', 27, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drpablo.fernandez@gmail.com','pafern', 'Pablo', 'Fernandez', 33, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('drmartin.alonso@gmail.com','maralo', 'Martin', 'Alonso',  37, 'M');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('dramartina.fuentes@gmail.com','martfuen', 'Martina', 'Fuentes', 28, 'F');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('dracamila.rojas@gmail.com','carojas', 'Camila', 'Rojas', 57, 'F');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('dralucila.martinez@gmail.com','lumart', 'Lucila', 'Martinez',  37, 'F');
+INSERT INTO users (username,  password, name, lastName, edad, sexo) VALUES ('draludmila.romero@gmail.com','ludromer', 'Ludmila', 'Romero',  42, 'F');
 
 
 GO
