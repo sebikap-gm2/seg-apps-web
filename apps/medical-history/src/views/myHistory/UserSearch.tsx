@@ -1,10 +1,11 @@
 import { Role, User } from "@seg-apps-web/api-interfaces"
 import { useState } from "react"
-import { HTTP } from "../../services";
+import { HTTP, getCookie } from "../../services";
 
 const http = new HTTP('http://localhost:3333');
 
 export const UserSearch = ({ onSelectUser }: { onSelectUser: (userId: User['id']) => void }) => {
+  const user = getCookie<User>('user')
   const [users, setUsers] = useState<User[]>([])
   const [userSearch, setUserSearch] = useState('')
 
@@ -17,7 +18,8 @@ export const UserSearch = ({ onSelectUser }: { onSelectUser: (userId: User['id']
   }
 
   return (
-    <>
+    <div style={{ marginLeft: '1em' }}>
+      <h6>Hola Doctor! Busque pacientes</h6>
       <div>
         <input value={userSearch} onChange={e => setUserSearch(e.target.value)} />
         <button onClick={handleUserSearch}>Search</button>
@@ -29,6 +31,6 @@ export const UserSearch = ({ onSelectUser }: { onSelectUser: (userId: User['id']
           </li>
         ))}
       </ul>
-    </>
+    </div>
   )
 }

@@ -13,10 +13,10 @@ export class MedicalHistoryService {
   }
 
 
-  static async getByUserId(userId: string) {
-    console.log({userId});
+  static async getByUserId(userId: string, doctorId?: string) {
     const intUserId = parseInt(userId);
-    return MedicalHistoryRepository.getByUserId(intUserId)
+    const intDoctorId = doctorId ? parseInt(doctorId) : undefined;
+    return MedicalHistoryRepository.getByUserId(intUserId, intDoctorId)
       .then(medicalHistory => medicalHistory)
       .catch((error) => {
         throw new Error(`Error fetching Medical History by userId: ${error.message}`);

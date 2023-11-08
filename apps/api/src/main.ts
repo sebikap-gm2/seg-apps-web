@@ -71,7 +71,7 @@ app.get('/users', async (req, res) => {
   res.status(200).send(users)
 })
 
-app.get('/observations', async (req: TypedRequestQuery<{ medicalHistories: MedicalHistory[] }>, res) => {
+app.get('/medicalHistory', async (req: TypedRequestQuery<{ medicalHistories: MedicalHistory[] }>, res) => {
   const medicalHistories = await MedicalHistoryService.getAll()
   /*   if (medicalHistories == null) {
       res.status(404).send({ message: 'User not found' })
@@ -81,9 +81,10 @@ app.get('/observations', async (req: TypedRequestQuery<{ medicalHistories: Medic
   res.status(200).send(medicalHistories)
 })
 
-app.get('/observations/:userId', async (req: TypedRequestQuery<{ userId: string }>, res) => {
+app.get('/medicalHistory/:userId', async (req: TypedRequestQuery<{ userId: string, doctorId: string }>, res) => {
+  const doctorId = req.query.doctorId as string | undefined;
   //@ts-ignore
-  const medicalHistories = await MedicalHistoryService.getByUserId(req.params.userId)
+  const medicalHistories = await MedicalHistoryService.getByUserId(req.params.userId, doctorId)
   /*   if (medicalHistories == null) {
       res.status(404).send({ message: 'User not found' })
       return

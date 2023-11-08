@@ -33,7 +33,7 @@ export const MyHistory = () => {
 
   const fetchMedicalHistory = async () => {
     setSelectedUserId(selectedUserId ? selectedUserId : userId);
-    const medicalHistoriesRes = await http.get<{ medicalHistories: MedicalHistory[] }>(`/observations/${selectedUserId ? selectedUserId : userId}`);
+    const medicalHistoriesRes = await http.get<{ medicalHistories: MedicalHistory[] }>(`/medicalHistory/${selectedUserId ? selectedUserId : userId}${user?.roles.includes('Doctor') ? `?doctorId=${user.id}` : ''}`);
     if (medicalHistoriesRes.ok) {
       console.log(medicalHistoriesRes)
       setMedicalHistories(medicalHistoriesRes.payload.medicalHistories)
