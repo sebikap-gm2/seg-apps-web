@@ -40,7 +40,7 @@ const ForgotPassword = () => {
           id="user"
           className="fadeIn second"
           name="user"
-          placeholder="Ingrese su usuario"
+          placeholder="Ingrese su mail"
           onChange={handleUsernameChange}
           disabled={recuperoContraseña}
         />
